@@ -1,0 +1,54 @@
+<mujoco model="two finger">
+  <compiler inertiafromgeom="true"/>
+  <default>
+    <!-- <joint armature="0" damping="0.1" limited="false"/> -->
+    <!-- <geom contype="1" friction="1 0.1 0.1" rgba="0.4 0.33 0.26 1.0"/> -->
+    <tendon/>
+    <motor ctrlrange="-3 3"/>
+  </default>
+  <option gravity="0 0 -0.0" timestep="0.02" />
+
+  <!-- <size nstack="3000"/> -->
+  <worldbody>
+    <light diffuse=".5 .5 .5" pos="0 0 3" dir="0 0 -1"/>
+    <!--geom name="ground" type="plane" pos="0 0 0" /-->
+    <geom name="rail" pos="0 0 0" quat="0.707 0 0.707 0" size="0.02 1" contype="0" conaffinity = "0" type="capsule" rgba="1 1 1 1"/>
+    <body name="upper" pos="0 0 0">
+      <joint axis="0 1 0" name="dof1" pos="0 0 0" type="hinge"/>
+      <geom name="upper" pos="0 0 -0.2" quat="0.707 0 0 0.707" size="0.15 0.2"  friction="1. 0.1 0.1" mass="0.05" type="capsule"  />
+      <body name="lower" pos="0 0 -0.4">
+        <joint axis="0 1 0" name="dof2" pos="0 0 0" type="hinge"/>
+        <geom name="lower" pos="0 0 -0.2" quat="0.707 0 0 0.707" size="0.15 0.2" friction="1. 0.1 0.1" mass="0.05" type="capsule"  />
+      </body>
+    </body>
+    <body name="object" pos="0 0 -1.0">
+      <geom name="object" pos="0 0 0" quat="0.707 0 0 0.707" size="0.2 0.15" friction="0.1 0. 0." mass="0.05" type="capsule" />
+      <joint axis="0 1 0" name="object" pos="0 0 0" type="hinge"/>
+
+    </body>
+    <body name="goal" pos="0 0 -1.0">
+      <geom name="goal" density="0.00001" pos="0 0 0" quat="0.707 0 0 0.707" size="0.2 0.15" 
+      contype="0" conaffinity = "0" friction="1 0. 0." mass="0.05" type="capsule" rgba="1 0 1 0.25"/>
+      <joint axis="0 1 0" name="goal" pos="0 0 0" damping="10." type="hinge"/>
+    </body>
+  </worldbody>
+  <actuator>
+    <motor ctrllimited="true" ctrlrange="-1 1" gear=".3" joint="dof1" name="dof1"/>
+    <motor ctrllimited="true" ctrlrange="-1 1" gear=".3" joint="dof2" name="dof2"/>
+  </actuator>
+  <contact>
+    <exclude body1="upper" body2="lower"/>
+  </contact>
+  <keyframe>
+    <key name="home"
+      qpos="
+    -1.5 +1.5 -1.5 1.047
+    "
+    qvel="
+    0 0 5.0 0
+    "
+    />
+    
+
+  </keyframe>
+</mujoco>

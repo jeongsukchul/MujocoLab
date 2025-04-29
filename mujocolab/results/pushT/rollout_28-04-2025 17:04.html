@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Brax visualizer</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+  </head>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #brax-viewer {
+      height: 480px;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.150.1/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.150.1/examples/jsm/",
+        "lilgui": "https://cdn.jsdelivr.net/npm/lil-gui@0.18.0/+esm",
+        "viewer": "https://cdn.jsdelivr.net/gh/google/brax@v0.12.3/brax/visualizer/js/viewer.js"
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/pako@2.1.0/dist/pako.min.js"></script>
+
+  <script type="application/javascript">
+  var system = "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";
+  // decode base64 (convert ascii to binary)
+  system = atob(system);
+  // convert binary string to character-number array
+  system = system.split('').map(function(x){return x.charCodeAt(0);});
+  // decompress
+  system = pako.inflate(system);
+  // convert gunzipped byteArray back to ascii string
+  system = new TextDecoder("utf-8").decode(system);
+  // and load json
+  system = JSON.parse(system);
+  </script>
+
+  <body>
+
+    <div id="brax-viewer"></div>
+
+    <script type="module">
+      import {Viewer} from 'viewer';
+      const domElement = document.getElementById("brax-viewer");
+      var viewer = new Viewer(domElement, system);
+    </script>
+
+  </body>
+
+</html>

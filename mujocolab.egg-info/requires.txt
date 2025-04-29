@@ -1,0 +1,17 @@
+gym
+pandas
+seaborn
+matplotlib
+imageio
+control
+tqdm
+tyro
+meshcat
+sympy
+gymnax
+jax[cuda12]
+jax-cosmo
+distrax
+gputil
+jaxopt
+brax

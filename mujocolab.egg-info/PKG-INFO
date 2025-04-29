@@ -1,0 +1,25 @@
+Metadata-Version: 2.2
+Name: mujocolab
+Version: 0.0.1
+Author: Sukchul Jeong
+Author-email: tjrcjf410@snu.ac.kr
+Requires-Dist: gym
+Requires-Dist: pandas
+Requires-Dist: seaborn
+Requires-Dist: matplotlib
+Requires-Dist: imageio
+Requires-Dist: control
+Requires-Dist: tqdm
+Requires-Dist: tyro
+Requires-Dist: meshcat
+Requires-Dist: sympy
+Requires-Dist: gymnax
+Requires-Dist: jax[cuda12]
+Requires-Dist: jax-cosmo
+Requires-Dist: distrax
+Requires-Dist: gputil
+Requires-Dist: jaxopt
+Requires-Dist: brax
+Dynamic: author
+Dynamic: author-email
+Dynamic: requires-dist

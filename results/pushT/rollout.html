@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Brax visualizer</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+  </head>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #brax-viewer {
+      height: 480px;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.150.1/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.150.1/examples/jsm/",
+        "lilgui": "https://cdn.jsdelivr.net/npm/lil-gui@0.18.0/+esm",
+        "viewer": "https://cdn.jsdelivr.net/gh/google/brax@v0.12.3/brax/visualizer/js/viewer.js"
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/pako@2.1.0/dist/pako.min.js"></script>
+
+  <script type="application/javascript">
+  var system = "eJzdVttu00AQ/ZXKzy3amZ2Z3eGRHwCpvEURCqopEUkcxUEUqvw7Z22nzQ3Rqg0P+GEVz+zunHPm4txXzXJdvb24r9bTed2u6yVewpsg3j0pkCdLyS4vqsVkXsNZvV+up82i2sA0my6+fSr2Fo5Rtfzefq1XFRztbHrT/7ptJrNqvHP8+ieizDtX3czbLvaPZjW7KVfcP2z7MJss6mobY3pzB+MV4X3ZdMGA8fKiW66wptA/7DlwZC4BV00hNqKHjdulc95+nvTXSLHFWFYGTer97fRXgTHicob7gzQEIfFAZMTjTdk6sN5Df72E6RB+OIV+i+dpYEMHcPAeQIVNB4RJNGgOtnNNB3VIyx7Ud83dAc6TKj8b5yPYI5w04FS3ICaSu90nwR8axyi7J2K/OpGxM5A5iftpDPukdB3yl5TwS1Ny5D0u5n+VIn71FD2X3MtSVgZfu56s63523fW5GxiNTjIqPIeJSggQQ+S8ZXGU0KKKWjRT4ywR0yxpN6OAKUdKMQUhSVH6AzsqnZbpD9YyNl2jScpmWZRi8P1t7irC0YMIZRcd747xj6vJov3SrOZVl+5H+iHlqGKJ1JPkkFJPn5gCBckc8RNE/lv6oOeawICVWM2l/0IJqeASD/iomqvvARHN2Ip6Uc4K+TqnWEaZZI+UxYxyOptChasBHxIE7NnSgRIhJyOPEIpitOx+PgHLrYUVetDNTIKkfiKIsgRQE09oQ9VdMYgtuGRnQ5FJ6InD6Ix2E4hIqsrnlC8LskXGaG6U/4EOlLSUgwf0BFOys6pHOBGzIlziGFFXHYLoiUhBjbwAjLtaMHBFeHBMSna7f0IkGFwSnRMQJj+ndkgzK5KWg6N3dH8T2oJcUQiC8Vuiva54483mN2gAeWI=";
+  // decode base64 (convert ascii to binary)
+  system = atob(system);
+  // convert binary string to character-number array
+  system = system.split('').map(function(x){return x.charCodeAt(0);});
+  // decompress
+  system = pako.inflate(system);
+  // convert gunzipped byteArray back to ascii string
+  system = new TextDecoder("utf-8").decode(system);
+  // and load json
+  system = JSON.parse(system);
+  </script>
+
+  <body>
+
+    <div id="brax-viewer"></div>
+
+    <script type="module">
+      import {Viewer} from 'viewer';
+      const domElement = document.getElementById("brax-viewer");
+      var viewer = new Viewer(domElement, system);
+    </script>
+
+  </body>
+
+</html>
